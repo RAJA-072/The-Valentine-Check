@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <title>YES/NO</title>
+    <style>
+        .body{
+            background-image:url(./4.jpg);
+        }
+        .bgg {
+            width: 100%;
+            height:100vh ;
+            background: url("./images/Kiyumie.gif") center no-repeat;
+            background-size: cover;
+        }
+        #yesButton, .noButton {
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border: none;
+            color: white;
+        }
+        #yesButton {
+            background-color: #4CAF50;
+        }
+        #yesButton:hover {
+            background-color: #45a049;
+        }
+        .noButton {
+            background-color: #f44336;
+        }
+        .noButton:hover {
+            background-color: #e91e63;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="bgg">
+<div class="bg">
+    <img id="imageDisp" style="height: 20vh;padding: 10% 50% 0vh 25% ;" src="./images/image1.gif" alt="">
+    <h1 id="question" style="text-align: center; font-family:"Segoe UI, Tahoma, Geneva, Verdana, sans-serif">Will you Be My Valentine ?</h1>
+    <div class="button-container" id="button-container">
+        <button id="yesButton">Yes</button>
+        <button class="noButton" id="noButton">No</button>
+    </div>
+</div></div>
+
+<script type="module">
+    import confetti from 'https://cdn.skypack.dev/canvas-confetti';
+    const yesButton = document.getElementById('yesButton');
+    const noButton = document.getElementById('noButton');
+    const imageDisp = document.getElementById('imageDisp');
+    const question = document.getElementById('question');
+    const buttonContainer = document.getElementById('button-container');
+
+    let noClickCount = 0;
+    let buttonHeight = 48; // Starting height in pixels
+    let buttonWidth = 80;
+    let fontSize = 16; // Starting font size in pixels
+    const imagePaths = [
+        "./images/image1.gif",
+        "./images/image2.gif",
+        "./images/image3.gif",
+        "./images/image4.gif",
+        "./images/image5.gif",
+        "./images/image7.gif",
+        "./images/image6.gif",
+        "./images/image8.gif"
+    ];
+
+    noButton.addEventListener('click', () => {
+        if (noClickCount < 6) {
+            noClickCount++;
+            imageDisp.src = imagePaths[noClickCount];
+            buttonHeight += 35; // Increase height by 35px on each click
+            buttonWidth += 35; // Increase width by 35px on each click
+            fontSize += 5; // Increase font size by 5px on each click
+            yesButton.style.height = `${buttonHeight}px`; // Update button height
+            yesButton.style.width = `${buttonWidth}px`; // Update button width
+            yesButton.style.fontSize = `${fontSize}px`; // Update font size
+            noButton.textContent = ["No", "Are you sure?", "Think twice", "Don't do this to me :(", "You're breaking my heart", "I'm gonna cry...", "Avlothan mariyatha"][noClickCount];
+        }
+    });
+
+    yesButton.addEventListener('click', () => {
+        imageDisp.src = './images/image8.gif'; // Change to image8.gif
+        question.textContent = "Kandupudichuten pathiya!! Idha solla evlo nala :3"; // Change the question text
+        buttonContainer.style.display = 'none'; // Hide both buttons
+        confetti(); // Trigger confetti animation
+    });
+</script>
+</body>
+</html>
